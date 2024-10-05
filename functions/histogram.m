@@ -16,7 +16,7 @@ function imhistHistogram = showImhistHistogram(fileInput)
             % Menampilkan histogram grayscale
             subplot(2, 2, 2);
             histogram = imhist(img);  % Assign grayscale histogram pada output
-            bar(0:255, histogram, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta');
+            bar(0:255, histogram, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta'); % Plot histogram
             title('Grayscale Histogram (with imhist)');
             set(gca, 'XLim', [0 255], 'YLim', [0 max(histogram)]);  % Set properti sumbu x dan sumbu y
             
@@ -34,7 +34,7 @@ function imhistHistogram = showImhistHistogram(fileInput)
             subplot(2, 2, 2);
             combined_hist = imhist(rgb2gray(img));  % Menampilkan histogram
             imhistHistogram = combined_hist;
-            bar(0:255, combined_hist , 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta');
+            bar(0:255, combined_hist , 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta'); % Plot histogram
             title('Combined Histogram (with imhist)');
             set(gca, 'XLim', [0 255], 'YLim', [0 max(combined_hist)]); % Set properti sumbu x dan sumbu y
     
@@ -90,11 +90,11 @@ function scratchHistogram = showScratchHistogram(fileInput)
             end
             
             % Assign histogram grayscale sebagai output
-            scratchHistogram = grayscale_hist;  % Assign grayscale histogram to output
+            scratchHistogram = grayscale_hist;
             
             % Menampilkan histogram grayscale
             subplot(2, 2, 2);
-            bar(0:255, grayscale_hist, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta');
+            bar(0:255, grayscale_hist, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta'); % Plot histogram
             title('Grayscale Histogram (without imhist)');
             set(gca, 'XLim', [0 255], 'YLim', [0 max(grayscale_hist)]); % Set properti sumbu x dan sumbu y
             
@@ -121,10 +121,10 @@ function scratchHistogram = showScratchHistogram(fileInput)
             end
             
             % Assign combined histogram sebagai output
-            scratchHistogram = combined_hist;  % Assign combined grayscale histogram to output
+            scratchHistogram = combined_hist;
             
             subplot(2, 2, 2);
-            bar(0:255, combined_hist, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta');  % Plot histogram combined grayscale
+            bar(0:255, combined_hist, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta');  % Plot histogram
             title('Combined Histogram (without imhist)');
             set(gca, 'XLim', [0 255], 'YLim', [0 max(combined_hist)]); % Set properti sumbu x dan sumbu y
             
