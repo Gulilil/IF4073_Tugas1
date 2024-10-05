@@ -56,9 +56,9 @@ imshow(result_img);
 
 % Write image
 if is_grayscaled == 1
-    suffix = "_grayscaled";
+    suffix = "grayscaled_";
 else 
     suffix = ""; 
 end
-img_out_name = strcat("image_brightening_", img_name, suffix);
+img_out_name = strcat("image_brightening_", suffix, img_name);
 write_image(result_img, img_out_name)
