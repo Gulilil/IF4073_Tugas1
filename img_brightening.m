@@ -52,7 +52,7 @@ disp("[DISPLAYING] Here is displayed the initial and the result image");
 combined_image = cat(2, img, result_img); 
 figure;
 imshow(combined_image);
-title('Images Side by Side Comparison');
+title('(Initial) | Images Side by Side Comparison | (Result)');
 
 
 % Write image

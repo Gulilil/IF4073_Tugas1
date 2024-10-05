@@ -27,8 +27,8 @@ else
 end
 
 % Display initial histogram
-hist = histogram(img);
-histogram_show(hist, is_gray);
+[hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram(img);
+histogram_show(hist_data, hist_data_r, hist_data_b, hist_data_g, is_gray);
 
 if (is_gray)
     max_val = search_max_pixel(img, rows, cols);
@@ -76,7 +76,7 @@ disp("[DISPLAYING] Here is displayed the initial and the result image");
 combined_image = cat(2, img, result_img); 
 figure;
 imshow(combined_image);
-title('Images Side by Side Comparison');
+title('(Initial) | Images Side by Side Comparison | (Result)');
 
 
 % Write image

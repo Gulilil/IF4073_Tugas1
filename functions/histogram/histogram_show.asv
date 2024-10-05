@@ -1,0 +1,19 @@
+function histogram_show(histogram_data, is_grayscale)
+    if (is_grayscale)
+        % Menampilkan histogram grayscale
+        subplot(1, 1, 1);
+        bar(0:255, histogram_data, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta'); % Plot histogram
+        title('Grayscale Histogram');
+        set(gca, 'XLim', [0 255], 'YLim', [0 max(histogram_data)]); % Set properti sumbu x dan sumbu y
+    else
+        subplot(1, 1, 1);
+        bar(0:255, combined_hist, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta');  % Plot histogram
+        title('Combined Histogram');
+        set(gca, 'XLim', [0 255], 'YLim', [0 max(combined_hist)]); % Set properti sumbu x dan sumbu y
+           
+        
+                    subplot(2, 3, i + 3); 
+
+    end
+end
+
