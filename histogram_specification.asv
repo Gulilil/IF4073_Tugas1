@@ -5,12 +5,12 @@ addpath('./functions');
 disp("Make sure to put the image inside the `img_in` folder!") ;
 img_name_source = input("Which image do you want to enhance? ", 's');
 img_source = read_image(img_name_source);
-% imshow(img_source);
+imshow(img_source);
 
 disp("Make sure the reference image is the same size as source image!")
 img_name_reference = input("Which image do you want to refer? ", 's');
 img_reference = read_image(img_name_reference);
-% imshow(img_reference);
+imshow(img_reference);
 
 % Image details
 [rows_s, cols_s, num_channels_s] = size(img_source);
@@ -42,5 +42,5 @@ else
     end
 
     % Process Image
-    hist = histogram(img_name_source);
+    hist = showScratchHistogram()
 end

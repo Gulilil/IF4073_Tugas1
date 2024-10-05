@@ -2,7 +2,9 @@
 addpath('./functions');
 
 % Transformasi pangkat (𝑠 = 𝑐(r)^n, 𝑐 dan n adalah parameter input dari pengguna)
-[img, img_name] = read_image();
+disp("Make sure to put the image inside the `img_in` folder!")    
+img_name = input("Which image do you want to process? ", 's');
+img = read_image(img_name);
 
 % Display initial image
 disp("[DISPLAYING] Here is displayed the initial image");

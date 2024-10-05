@@ -2,7 +2,9 @@
 addpath('./functions');
 
 % Transformasi log (𝑠 = 𝑐 𝑙𝑜𝑔(1 + 𝑟), 𝑐 dan 𝑟 adalah parameter input dari pengguna)
-[img, img_name] = read_image();
+disp("Make sure to put the image inside the `img_in` folder!")    
+img_name = input("Which image do you want to process? ", 's');
+img = read_image(img_name);
 
 % Display initial image
 disp("[DISPLAYING] Here is displayed the initial image");

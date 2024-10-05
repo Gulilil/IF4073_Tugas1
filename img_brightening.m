@@ -1,8 +1,10 @@
 % Initialization 
 addpath('./functions');
 
-% Image brightening (𝑠 = 𝑟 + 𝑏 dan 𝑠 = 𝑎𝑟 + 𝑏, 𝑎 dan 𝑏 adalah parameter input dari pengguna) 
-[img, img_name] = read_image();
+% Image brightening (𝑠 = 𝑟 + 𝑏 dan 𝑠 = 𝑎𝑟 + 𝑏, 𝑎 dan 𝑏 adalah parameter input dari pengguna)
+disp("Make sure to put the image inside the `img_in` folder!")    
+img_name = input("Which image do you want to process? ", 's');
+img = read_image(img_name);
 
 % Display initial image
 disp("[DISPLAYING] Here is displayed the initial image");
