@@ -1,25 +1,21 @@
 % Initialization 
 addpath('./functions/image');
 addpath('./functions/histogram');
-addpath('./functions/vector');
+
 
 disp("Make sure to put the image inside the `img_in` folder!") ;
-% img_name_source = input("Which image do you want to enhance? ", 's');
-img_name_source = "savanna.jpg";
+img_name_source = input("Which image do you want to enhance? ", 's');
 img_source = read_image(img_name_source);
 % imshow(img_source);
 
 disp("Make sure the reference image is the same size as source image!")
-% img_name_reference = input("Which image do you want to refer? ", 's');
-img_name_source = "mountain.jpg";
+img_name_reference = input("Which image do you want to refer? ", 's');
 img_reference = read_image(img_name_reference);
 % imshow(img_reference);
 
 % Image details
 [rows_s, cols_s, num_channels_s] = size(img_source);
 [rows_r, cols_r, num_channels_r] = size(img_reference);
-
-MAX_PIXEL_VAL = 255;
 
 if (not (rows_s == rows_r) | not (cols_s == cols_r))
     disp('[FAILED] The two inputted images do not have the same size!');
@@ -49,19 +45,9 @@ else
     % Process Image
     [hist_data_source, hist_data_r_source, hist_data_b_source, hist_data_g_source] = histogram(img_source);
     [hist_data_ref, hist_data_r_ref, hist_data_b_ref, hist_data_g_ref] = histogram(img_reference);
-    img_size = rows_s * cols_s;
+        
     if (is_gray)
-        % Source
-        norm_hist_data_source = hist_data_source / img_size;
-        cmltv_norm_hist_data_source = make_cumulative(norm_hist_data_source);
-        result_hist_data_source = uint8(cmltv_norm_hist_data_source * MAX_PIXEL_VAL);
-        disp(result_hist_data_source);
 
-        % Ref
-        norm_hist_data_ref = hist_data_ref / img_size;
-        cmltv_norm_hist_data_ref = make_cumulative(norm_hist_data_ref);
-        result_hist_data_ref = uint8(cmltv_norm_hist_data_ref * MAX_PIXEL_VAL);
-        disp(result_hist_data_ref);
     else
     end
 end
