@@ -6,6 +6,9 @@ function imhistHistogram = histogram_imhist(fileInput)
     % Inisialisasi output variabel
     imhistHistogram = [];
 
+    % Buka figure window baru untuk menampilkan gambar dan histogram
+    figure;
+
     % Cek apakah file gambar ada
     if exist(fileInput, 'file')
         img = read_image(fileInput);
