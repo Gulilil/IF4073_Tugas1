@@ -3,7 +3,7 @@ addpath('./functions/image');
 addpath('./functions/histogram');
 addpath('./functions/vector');
 
-function final_hist_data = match_histogram(hist_data_source, hist_data_ref, img_size, MAX_PIXEL_VAL)
+function [final_hist_data, mapped_hist] = match_histogram(hist_data_source, hist_data_ref, img_size, MAX_PIXEL_VAL)
     % Source
     norm_hist_data_source = hist_data_source / img_size;
     cmltv_norm_hist_data_source = make_cumulative(norm_hist_data_source);
@@ -15,35 +15,18 @@ function final_hist_data = match_histogram(hist_data_source, hist_data_ref, img_
     norm_hist_data_ref = hist_data_ref / img_size;
     cmltv_norm_hist_data_ref = make_cumulative(norm_hist_data_ref);
     result_hist_data_ref = round(cmltv_norm_hist_data_ref * MAX_PIXEL_VAL);
-    disp(result_hist_data_ref);
+    % disp(result_hist_data_ref);
 
-    len = length(result_hist_data_ref);
+    len = length(result_hist_data_source);
+    mapped_hist = zeros(1, len);
     final_hist_data = zeros(1, len);
     for i = 1: len
-        hist_data_ref_match = result_hist_data_ref(i);
-        new_nk = new_hist_data_source(hist_data_ref_match);
-
-        fprintf("%d %d %d\n", i, hist_data_ref_match, new_nk);
-
-        valid = true;
-        if (new_nk) == 0 
-            valid = false;
-        end
-        % Search for previous index if new_nk == 0
-        % If index is the first index in the list, make it stay zero
-        while (not(valid))
-            if (hist_data_ref_match == 1 & new_nk == 0)
-                valid = true;
-            end
-            hist_data_ref_match = hist_data_ref_match - 1;
-            new_nk = new_hist_data_source(hist_data_ref_match);
-            if (not(new_nk == 0))
-                valid = true;
-            end
-        end
-        fprintf("%d %d %d\n------\n", i, hist_data_ref_match, new_nk);
-
-        final_hist_data(i) = new_nk;
+        idx_to_map_from_source = result_hist_data_source(i);
+        idx_nearest = get_index_nearest_value(result_hist_data_ref, idx_to_map_from_source);
+        n = new_hist_data_source(i);
+        mapped_hist(i) = idx_nearest;
+        final_hist_data(idx_nearest) = final_hist_data(idx_nearest) + n;
+        % fprintf("%d %d %d %d\n", i, idx_to_map_from_source, idx_nearest, n);
     end
 end
 
@@ -83,11 +66,11 @@ else
             img_reference = rgb2gray(img_reference);
         end
         is_gray = true;
-        result_img = zeros(rows, cols, 1, 'uint8');
+        result_img = zeros(rows_s, cols_s, 1, 'uint8');
     else
         disp("[PROCESS] Processing full color image!");
         is_gray = false;
-        result_img = zeros(rows, cols, 3, 'uint8');
+        result_img = zeros(rows_s, cols_s, 3, 'uint8');
     end
 
     % Process Image
@@ -98,14 +81,41 @@ else
     histogram_show(hist_data_ref, hist_data_r_ref, hist_data_b_ref, hist_data_g_ref, is_gray, "of Reference Image");
     img_size = rows_s * cols_s;
 
-    result_histogram = match_histogram(hist_data_source, hist_data_ref, img_size, MAX_PIXEL_VAL);
-    % disp(sum_value(result_histogram));
+    [result_histogram, mapped_hist] = match_histogram(hist_data_source, hist_data_ref, img_size, MAX_PIXEL_VAL);
     if (is_gray)
         histogram_show(result_histogram, [], [], [], is_gray, "of Result Match");
+        
+        for r= 1:rows_s
+            for c=1:cols_s
+                curr_pixel = img_source(r,c);
+                result_img(r, c) = mapped_hist(curr_pixel+1);
+            end
+        end
     else
-        result_histogram_r = match_histogram(hist_data_r_source, hist_data_r_ref, img_size, MAX_PIXEL_VAL);
-        result_histogram_g = match_histogram(hist_data_g_source, hist_data_g_ref, img_size, MAX_PIXEL_VAL);
-        result_histogram_b = match_histogram(hist_data_b_source, hist_data_b_ref, img_size, MAX_PIXEL_VAL);
+        [result_histogram_r, mapped_hist_r] = match_histogram(hist_data_r_source, hist_data_r_ref, img_size, MAX_PIXEL_VAL);
+        [result_histogram_g, mapped_hist_g] = match_histogram(hist_data_g_source, hist_data_g_ref, img_size, MAX_PIXEL_VAL);
+        [result_histogram_b, mapped_hist_b] = match_histogram(hist_data_b_source, hist_data_b_ref, img_size, MAX_PIXEL_VAL);
+
+        for r= 1:rows_s
+            for c=1:cols_s
+                curr_pixel_r = img_source(r, c, 1);
+                curr_pixel_g = img_source(r, c, 2);
+                curr_pixel_b = img_source(r, c, 3);
+        
+                result_img(r, c, 1) = mapped_hist(curr_pixel_r+1);
+                result_img(r, c, 2) = mapped_hist(curr_pixel_g+1);
+                result_img(r, c, 3) = mapped_hist(curr_pixel_b+1);
+            end
+        end
         histogram_show(result_histogram, result_histogram_r, result_histogram_g, result_histogram_b, is_gray, "of Result Match");
     end
+
+    disp(size(result_img));
+
+    % Show result image
+    disp("[DISPLAYING] Here is displayed the source, reference, and result image");
+    combined_image = cat(2, img_source, img_reference, result_img);
+    figure;
+    imshow(combined_image);
+    title('Display Images (Source | Reference | Result)');
 end
