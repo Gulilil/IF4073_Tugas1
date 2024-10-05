@@ -1,14 +1,11 @@
 % Initialization 
-addpath('./functions');
+addpath('./functions/image');
+addpath('./functions/histogram');
 
 % Transformasi log (𝑠 = 𝑐 𝑙𝑜𝑔(1 + 𝑟), 𝑐 dan 𝑟 adalah parameter input dari pengguna)
 disp("Make sure to put the image inside the `img_in` folder!")    
 img_name = input("Which image do you want to process? ", 's');
 img = read_image(img_name);
-
-% Display initial image
-disp("[DISPLAYING] Here is displayed the initial image");
-imshow(img);
 
 disp("[INFO] Image log transformation will generate a new image each pixel is calcualted in formula of s = c log(1+r).");
 c_coef = input("What is the c value? ");
@@ -52,8 +49,12 @@ for r = 1:rows
 end
 
 % Show result image
-disp("[DISPLAYING] Here is displayed the result image!");
-imshow(result_img);
+disp("[DISPLAYING] Here is displayed the initial and the result image");
+combined_image = cat(2, img, result_img); 
+figure;
+imshow(combined_image);
+title('Images Side by Side Comparison');
+
 
 % Write image
 if is_grayscaled == 1

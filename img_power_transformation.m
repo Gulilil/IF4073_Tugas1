@@ -1,14 +1,11 @@
 % Initialization 
-addpath('./functions');
+addpath('./functions/image');
+addpath('./functions/histogram');
 
 % Transformasi pangkat (𝑠 = 𝑐(r)^n, 𝑐 dan n adalah parameter input dari pengguna)
 disp("Make sure to put the image inside the `img_in` folder!")    
 img_name = input("Which image do you want to process? ", 's');
 img = read_image(img_name);
-
-% Display initial image
-disp("[DISPLAYING] Here is displayed the initial image");
-imshow(img);
 
 disp("[INFO] Image log transformation will generate a new image each pixel is calcualted in formula of s = c(r)^n."); 
 c_coef = input("What is the c value? ");
@@ -53,8 +50,11 @@ for r = 1:rows
 end
 
 % Show result image
-disp("[DISPLAYING] Here is displayed the result image!");
-imshow(result_img);
+disp("[DISPLAYING] Here is displayed the initial and the result image");
+combined_image = cat(2, img, result_img); 
+figure;
+imshow(combined_image);
+title('(Initial) << Images Side by Side Comparison >> (Result)');
 
 % Write image
 if is_grayscaled == 1

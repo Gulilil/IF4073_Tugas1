@@ -1,5 +1,6 @@
 % Initialization 
-addpath('./functions');
+addpath('./functions/image');
+addpath('./functions/histogram');
 
 
 disp("Make sure to put the image inside the `img_in` folder!") ;
