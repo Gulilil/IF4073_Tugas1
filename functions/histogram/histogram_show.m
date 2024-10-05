@@ -1,14 +1,15 @@
-function histogram_show(histogram_data, histogram_data_r, histogram_data_g, histogram_data_b, is_grayscale)
+function histogram_show(histogram_data, histogram_data_r, histogram_data_g, histogram_data_b, is_grayscale, additional_title_text)
+    figure('Color', 'w', 'Position', [50, 50, 1200, 600]);
     if (is_grayscale)
         % Menampilkan histogram grayscale
         subplot(1, 1, 1);
         bar(0:255, histogram_data, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta'); % Plot histogram
-        title('Grayscale Histogram');
+        title('Grayscale Histogram', additional_title_text);
         set(gca, 'XLim', [0 255], 'YLim', [0 max(histogram_data)]); % Set properti sumbu x dan sumbu y
     else
         subplot(2, 3, 2);
         bar(0:255, histogram_data, 'FaceColor', 'Magenta', 'EdgeColor', 'Magenta');  % Plot histogram
-        title('Combined Histogram');
+        title('Combined Histogram ', additional_title_text);
         set(gca, 'XLim', [0 255], 'YLim', [0 max(histogram_data)]); % Set properti sumbu x dan sumbu y
            
         for i= 1:3
@@ -26,7 +27,7 @@ function histogram_show(histogram_data, histogram_data_r, histogram_data_g, hist
             % Plot histogram RGB
             bar(0:255, channel_hist, 'FaceColor', clr(i), 'EdgeColor', 'none');  % Plot histogram
             set(gca, 'XLim', [0 255], 'YLim', [0 max(channel_hist)]);  % Set properti sumbu
-            title([clrTxt{i}, ' Histogram']);
+            title([clrTxt{i}, ' Histogram ', additional_title_text]);
             xlabel('Intensity');
         end
     end

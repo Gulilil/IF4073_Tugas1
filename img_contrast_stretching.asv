@@ -70,9 +70,6 @@ else
     end
 end
 
-% Display result histogram
-[hist_data_res, hist_data_r_res, hist_data_b_res, hist_data_g_res] = histogram(result_img);
-histogram_show(hist_data_res, hist_data_r_res, hist_data_b_res, hist_data_g_res, is_gray, "of Result Image");
 
 % Show result image
 disp("[DISPLAYING] Here is displayed the initial and the result image");
@@ -80,6 +77,10 @@ combined_image = cat(2, img, result_img);
 figure;
 imshow(combined_image);
 title('(Initial) | Images Side by Side Comparison | (Result)');
+
+% Display result histogram
+[hist_data_res, hist_data_r_res, hist_data_b_res, hist_data_g_res] = histogram(img);
+histogram_show(hist_data_res, hist_data_r_res, hist_data_b_res, hist_data_g_res, is_gray, "of Result Image");
 
 % Write image
 if is_grayscaled == 1

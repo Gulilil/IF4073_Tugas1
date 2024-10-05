@@ -5,9 +5,6 @@ function [histogram_data, histogram_data_r, histogram_data_g, histogram_data_b] 
     
     % Cek apakah gambar merupakan Grayscale atau RGB
     if numChannels == 1  % Kondisi Gambar Grayscale
-        subplot(2, 2, 1);
-        imshow(img);
-        title('Grayscale Image');
         
         % Inisialisasi histogram grayscale
         grayscale_hist = zeros(1, 256);  % Array untuk menyimpan nilai intensitas 0-255
@@ -29,8 +26,6 @@ function [histogram_data, histogram_data_r, histogram_data_g, histogram_data_b] 
     elseif numChannels == 3  % Kondisi Gambar RGB
         % Memisahkan kondisi warna RGB
         img = double(img);  % Konversi ke double untuk proses histogram
-        clr = 'rgb';        % Identifikasi RGB
-        clrTxt = {'Red', 'Green', 'Blue'};
         
         % Menghitung histogram combined untuk grayscale dari gambar RGB
         combined_hist = zeros(1, 256);  % Array untuk combined histogram
