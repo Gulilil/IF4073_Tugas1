@@ -3,6 +3,13 @@ function scratchHistogram = histogram(fileInput)
     % Cek apakah file gambar ada
     if exist(fileInput, 'file')
         img = read_image(fileInput);
+
+        % Periksa apakah gambar merupakan indexed
+        if isinteger(img) && size(img, 3) == 1  % Gambar index, punya colormap
+            [img, map] = imread(fileInput);  % Baca gambar dan colormap
+            img = ind2rgb(img, map);         % Convert indexed ke RGB
+            disp('Gambar indexed terdeteksi. Dikover ke RGB.');
+        end
         
         % Fungsi manual untuk menghitung histogram tanpa fungsi terpisah
         % Menghitung histogram secara manual untuk gambar grayscale atau channel RGB
@@ -90,7 +97,7 @@ function scratchHistogram = histogram(fileInput)
             scratchHistogram = [];  % Empty ketika file format tidak support
         end
     else
-        disp('File tidak tersedia atau bukan file .bmp.');
+        disp('File tidak tersedia');
         scratchHistogram = [];  % Empty ketika file tidak tersedia
     end
 end

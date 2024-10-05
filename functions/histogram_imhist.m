@@ -5,7 +5,14 @@ function imhistHistogram = histogram_imhist(fileInput)
 % Pengerjaan Nomor 1 (dengan Library imHist)
     % Cek apakah file gambar ada
     if exist(fileInput, 'file')
-        img = imread(fileInput);
+        img = read_image(fileInput);
+        
+        % Periksa apakah gambar merupakan indexed
+        if isinteger(img) && size(img, 3) == 1  % Gambar index, punya colormap
+            [img, map] = imread(fileInput);  % Baca gambar dan colormap
+            img = ind2rgb(img, map);         % Convert indexed ke RGB
+            disp('Gambar indexed terdeteksi. Dikover ke RGB.');
+        end
         
         % Cek apakah gambar merupakan Grayscale atau RGB
         if size(img, 3) == 1  % Kondisi Gambar Grayscale
@@ -54,7 +61,7 @@ function imhistHistogram = histogram_imhist(fileInput)
             imhistHistogram = [];  % Empty ketika file format tidak support
         end
     else
-        disp('File tidak tersedia atau bukan file .bmp.');
+        disp('File tidak tersedia');
         imhistHistogram = [];  % Empty ketika file tidak tersedia
     end
 end
