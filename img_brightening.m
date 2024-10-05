@@ -15,11 +15,14 @@ b = input("What is the b value? ");
 [rows, cols, num_channels] = size(img);
 fprintf("[INFO] An image size [%d, %d] is inputted!\n", rows, cols);
 
-size(img)
-
+is_grayscaled = input("Do you want the image to be grayscaled? (0/1) ");
 % Create placeholder for new image
-if (num_channels == 1)
+if (num_channels == 1 | is_grayscaled)
     disp("[PROCESS] Processing grayscale image!");
+    if (not(num_channels == 1))
+        % If full colored but want to be grayscaled
+        img = rgb2gray(img);
+    end
     is_gray = true;
     result_img = zeros(rows, cols, 1, 'uint8');
 else
@@ -50,5 +53,10 @@ disp("[DISPLAYING] Here is displayed the result image");
 imshow(result_img);
 
 % Write image
-img_out_name = strcat("image_brightening_", img_name);
+if is_grayscaled == 1
+    suffix = "_grayscaled";
+else 
+    suffix = ""; 
+end
+img_out_name = strcat("image_brightening_", img_name, suffix);
 write_image(result_img, img_out_name)

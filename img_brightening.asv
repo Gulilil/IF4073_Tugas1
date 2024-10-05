@@ -15,11 +15,14 @@ b = input("What is the b value? ");
 [rows, cols, num_channels] = size(img);
 fprintf("[INFO] An image size [%d, %d] is inputted!\n", rows, cols);
 
-size(img)
+is_grayscaled = input("Do you want the image to be grayscaled? (0/1) ");
 
 % Create placeholder for new image
-if (num_channels == 1)
+if (num_channels == 1 | is_grayscaled)
     disp("[PROCESS] Processing grayscale image!");
+    if (not(num_channels == 1))
+        img = rgb2gray(img);
+    end
     is_gray = true;
     result_img = zeros(rows, cols, 1, 'uint8');
 else
