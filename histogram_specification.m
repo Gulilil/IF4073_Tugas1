@@ -31,16 +31,14 @@ function [final_hist_data, mapped_hist] = match_histogram(hist_data_source, hist
 end
 
 disp("Make sure to put the image inside the `img_in` folder!") ;
-% img_name_source = input("Which image do you want to enhance? ", 's');
-img_name_source = "savanna.jpg";
+img_name_source = input("Which image do you want to enhance? ", 's');
+% img_name_source = "savanna.jpg";
 img_source = read_image(img_name_source);
-% imshow(img_source);
 
 disp("Make sure the reference image is the same size as source image!")
-% img_name_reference = input("Which image do you want to refer? ", 's');
-img_name_source = "mountain.jpg";
+img_name_reference = input("Which image do you want to refer? ", 's');
+% img_name_source = "wallpaper.jpg";
 img_reference = read_image(img_name_reference);
-% imshow(img_reference);
 
 % Image details
 [rows_s, cols_s, num_channels_s] = size(img_source);
