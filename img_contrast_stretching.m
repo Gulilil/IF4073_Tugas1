@@ -35,6 +35,13 @@ if (is_gray)
     max_val = search_max_pixel(img, rows, cols);
     min_val = search_min_pixel(img, rows, cols);
     fprintf('[INFO] Max value: %d, Min value: %d\n', max_val, min_val);
+
+    for r = 1:rows
+        for c = 1: cols
+            curr_pixel = img(r,c);
+            result_img(r, c) = normalize_pixel(curr_pixel, max_val, min_val);
+        end
+    end
 else
     r_aspect = img(:,:,1);  % Red channel
     max_val_r = search_max_pixel(r_aspect, rows, cols);
@@ -50,18 +57,30 @@ else
     max_val_b = search_max_pixel(b_aspect, rows, cols);
     min_val_b = search_min_pixel(b_aspect, rows, cols);
     fprintf('[INFO] Blue : Max value: %d, Min value: %d\n', max_val_b, min_val_b);
+
+    for r = 1:rows
+        for c = 1: cols
+            curr_pixel_r = double(img(r, c, 1));
+            curr_pixel_g = double(img(r, c, 2));
+            curr_pixel_b = double(img(r, c, 3));
+
+            result_img(r, c, 1) = normalize_pixel(curr_pixel_r, max_val_r, min_val_r);
+            result_img(r, c, 2) = normalize_pixel(curr_pixel_g, max_val_g, min_val_g);
+            result_img(r, c, 3) = normalize_pixel(curr_pixel_b, max_val_b, min_val_b);
+        end
+    end
 end
 
 
 % Show result image
-%disp("[DISPLAYING] Here is displayed the result image!");
-%imshow(result_img);
+disp("[DISPLAYING] Here is displayed the result image!");
+imshow(result_img);
 
 % Write image
-%if is_grayscaled == 1
-%    suffix = "grayscaled_";
-%else 
-%    suffix = ""; 
-%end
-%img_out_name = strcat("image_constract_stretching_", suffix, img_name);
-%write_image(result_img, img_out_name)
+if is_grayscaled == 1
+    suffix = "grayscaled_";
+else 
+    suffix = ""; 
+end
+img_out_name = strcat("image_constract_stretching_", suffix, img_name);
+write_image(result_img, img_out_name)
