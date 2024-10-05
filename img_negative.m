@@ -1,7 +1,7 @@
 % Initialization 
 addpath('./functions');
 
-% Image brightening (𝑠 = 𝑟 + 𝑏 dan 𝑠 = 𝑎𝑟 + 𝑏, 𝑎 dan 𝑏 adalah parameter input dari pengguna) 
+% Citra negatif dan balikan citra negatif
 [img, img_name] = read_image();
 
 % Display initial image

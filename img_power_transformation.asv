@@ -1,15 +1,16 @@
 % Initialization 
 addpath('./functions');
 
-% Transformasi log (𝑠 = 𝑐 𝑙𝑜𝑔(1 + 𝑟), 𝑐 dan 𝑟 adalah parameter input dari pengguna)
+% Transformasi pangkat (𝑠 = 𝑐(r)^n, 𝑐 dan n adalah parameter input dari pengguna)
 [img, img_name] = read_image();
 
 % Display initial image
 disp("[DISPLAYING] Here is displayed the initial image");
 imshow(img);
 
-disp("[INFO] Image log transformation will generate a new image each pixel is calcualted in formula of s = c log(1+r).");
+disp("[INFO] Image log transformation will generate a new image each pixel is calcualted in formula of s = c(r)^n."); 
 c_coef = input("What is the c value? ");
+n = input("What is the n value? ")
 
 [rows, cols, num_channels] = size(img);
 fprintf("[INFO] An image size [%d, %d] is inputted!\n", rows, cols);
@@ -31,15 +32,15 @@ for r = 1:rows
     for c = 1:cols
         if (is_gray)
             curr_pixel = double(img(r,c));
-            result_img(r, c) = validate_pixel(c_coef * log(1 + curr_pixel));
+            result_img(r, c) = validate_pixel(c_coef * (curr_pixel ^ n));
         else
-            curr_pixel_r = double(img(r, c, 1));
-            curr_pixel_g = double(img(r, c, 2));
-            curr_pixel_b = double(img(r, c, 3));
+            curr_pixel_r = double(img(r, c, 1))/ PIXEL_MAX_VAL;
+            curr_pixel_g = double(img(r, c, 2))/ PIXEL_MAX_VAL;
+            curr_pixel_b = double(img(r, c, 3))/ PIXEL_MAX_VAL;
 
-            result_img(r, c, 1) = validate_pixel(uint8(c_coef * log(1 + curr_pixel_r)));
-            result_img(r, c, 2) = validate_pixel(uint8(c_coef * log(1 + curr_pixel_g)));
-            result_img(r, c, 3) = validate_pixel(uint8(c_coef * log(1 + curr_pixel_b)));
+            result_img(r, c, 1) = validate_pixel(uint8(c_coef * (curr_pixel_r ^ n) * PIXEL_MAX_VAL)) ;
+            result_img(r, c, 2) = validate_pixel(uint8(c_coef * (curr_pixel_g ^ n))) * PIXEL_MAX_VAL;
+            result_img(r, c, 3) = validate_pixel(uint8(c_coef * (curr_pixel_b ^ n))) * PIXEL_MAX_VAL;
         end
     end
 end
@@ -49,5 +50,5 @@ disp("[DISPLAYING] Here is displayed the result image!");
 imshow(result_img);
 
 % Write image
-img_out_name = strcat("image_log_transformation_", img_name);
+img_out_name = strcat("image_power_transformation_", img_name);
 write_image(result_img, img_out_name)
