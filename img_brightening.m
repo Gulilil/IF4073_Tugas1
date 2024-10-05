@@ -2,12 +2,10 @@
 addpath('./functions');
 
 % Image brightening (𝑠 = 𝑟 + 𝑏 dan 𝑠 = 𝑎𝑟 + 𝑏, 𝑎 dan 𝑏 adalah parameter input dari pengguna) 
-disp("Put the image inside the `img_in` folder!")
-img_name = input("Which image do you want to process? ", 's');
-img_path = strcat("img_in/"+img_name);
-img = imread(img_path); 
+[img, img_name] = read_image();
 
 % Display initial image
+disp("Here is displayed the initial image");
 imshow(img)
 
 disp("Image brightening will generate a new image each pixel is calcualted in formula of s = ar+b.");
@@ -46,4 +44,9 @@ for r = 1:rows
 end
 
 % Show result image
+disp("Here is displayed the result image");
 imshow(result_img);
+
+% Write image
+img_out_name = strcat("image_brightening_", img_name)
+write_image(result_img, img_out_name)
