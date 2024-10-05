@@ -5,15 +5,15 @@ addpath('./functions');
 [img, img_name] = read_image();
 
 % Display initial image
-disp("Here is displayed the initial image");
+disp("[DISPLAYING] Here is displayed the initial image");
 imshow(img)
 
-disp("Image brightening will generate a new image each pixel is calcualted in formula of s = ar+b.");
+disp("[INFO] Image brightening will generate a new image each pixel is calcualted in formula of s = ar+b.");
 a = input("What is the a value? ");
 b = input("What is the a value? ");
 
 [rows, cols, num_channels] = size(img);
-fprintf("An image size [%d, %d] is inputted!\n", rows, cols);
+fprintf("[INFO] An image size [%d, %d] is inputted!\n", rows, cols);
 
 % Create placeholder for new image
 if (num_channels == 1)
@@ -44,9 +44,9 @@ for r = 1:rows
 end
 
 % Show result image
-disp("Here is displayed the result image");
+disp("[DISPLAYING] Here is displayed the result image");
 imshow(result_img);
 
 % Write image
-img_out_name = strcat("image_brightening_", img_name)
+img_out_name = strcat("image_brightening_", img_name);
 write_image(result_img, img_out_name)
