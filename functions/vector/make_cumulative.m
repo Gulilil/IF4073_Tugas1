@@ -5,7 +5,7 @@ function result_vector = make_cumulative(vector)
         if (i == 1)
             result_vector(i) = vector(i);
         else
-            result_vector(i) = vector(i) + result_vector(i-1)
+            result_vector(i) = vector(i) + result_vector(i-1);
         end
     end
 end
