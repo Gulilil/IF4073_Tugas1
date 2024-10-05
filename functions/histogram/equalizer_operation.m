@@ -1,6 +1,6 @@
 % Function untuk melakukan histogram equalization pada satu channel (grayscale)
 
-function imageEqualized = equalizeChannel(channel)
+function imageEqualized = equalizer_operation(channel)
     % Ukuran total pixel dalam channel
     [rows, cols] = size(channel);
     totalPixels = rows * cols;
