@@ -30,13 +30,13 @@ function [final_hist_data, mapped_hist] = match_histogram(hist_data_source, hist
     end
 end
 
-disp("Make sure to put the image inside the `img_in` folder!") ;
-img_name_source = input("Which image do you want to enhance? ", 's');
+disp("[INFO] Make sure to put the image inside the `img_in` folder!") ;
+img_name_source = input("[INPUT] Which image do you want to enhance? ", 's');
 % img_name_source = "savanna.jpg";
 img_source = read_image(img_name_source);
 
-disp("Make sure the reference image is the same size as source image!")
-img_name_reference = input("Which image do you want to refer? ", 's');
+disp("[INFO] Make sure the reference image is the same size as source image!")
+img_name_reference = input("[INPUT] Which image do you want to refer? ", 's');
 % img_name_source = "wallpaper.jpg";
 img_reference = read_image(img_name_reference);
 
@@ -54,7 +54,7 @@ else
     % Both image rows and cols should be the same
     fprintf("[INFO] The images with size [%d, %d] are inputted!\n", rows_s, cols_s);
     
-    is_grayscaled = input("Do you want the image to be grayscaled? (0/1) ");
+    is_grayscaled = input("[INPUT] Do you want the image to be grayscaled? (0/1) ");
     % Create placeholder for new image
     if (num_channels_s == 1 | is_grayscaled)
         disp("[PROCESS] Processing grayscale image!");
@@ -117,12 +117,17 @@ else
     imshow(combined_image);
     title('Display Images (Source | Reference | Result)');
 
-    % Write image
-    if is_grayscaled == 1
-        suffix = "grayscaled_";
-    else 
-        suffix = ""; 
+    % Saving option
+    is_saved = input("[INPUT] Do you want to save the result image? (0/1) ");
+    
+    if is_saved
+        % Write image
+        if is_grayscaled == 1
+            suffix = "grayscaled_";
+        else 
+            suffix = ""; 
+        end
+        img_out_name = strcat("histogram_specification_", suffix, img_name_source, img_name_reference);
+        write_image(combined_image, img_out_name);
     end
-    img_out_name = strcat("histogram_specification_", suffix, img_name_source, img_name_reference);
-    write_image(combined_image, img_out_name);
 end

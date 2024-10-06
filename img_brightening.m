@@ -3,18 +3,18 @@ addpath('./functions/image');
 addpath('./functions/histogram');
 
 % Image brightening (𝑠 = 𝑟 + 𝑏 dan 𝑠 = 𝑎𝑟 + 𝑏, 𝑎 dan 𝑏 adalah parameter input dari pengguna)
-disp("Make sure to put the image inside the `img_in` folder!")    
-img_name = input("Which image do you want to process? ", 's');
+disp("[INFO] Make sure to put the image inside the `img_in` folder!")    
+img_name = input("[INPUT] Which image do you want to process? ", 's');
 img = read_image(img_name);
 
 disp("[INFO] Image brightening will generate a new image each pixel is calcualted in formula of s = ar+b.");
-a = input("What is the a value? ");
-b = input("What is the b value? ");
+a = input("[INPUT] What is the a value? ");
+b = input("[INPUT] What is the b value? ");
 
 [rows, cols, num_channels] = size(img);
 fprintf("[INFO] An image size [%d, %d] is inputted!\n", rows, cols);
 
-is_grayscaled = input("Do you want the image to be grayscaled? (0/1) ");
+is_grayscaled = input("[INPUT] Do you want the image to be grayscaled? (0/1) ");
 % Create placeholder for new image
 if (num_channels == 1 | is_grayscaled)
     disp("[PROCESS] Processing grayscale image!");
@@ -54,12 +54,16 @@ figure;
 imshow(combined_image);
 title('(Initial) | Images Side by Side Comparison | (Result)');
 
+% Saving option
+is_saved = input("[INPUT] Do you want to save the result image? (0/1) ");
 
-% Write image
-if is_grayscaled == 1
-    suffix = "grayscaled_";
-else 
-    suffix = ""; 
+if is_saved
+    % Write image
+    if is_grayscaled == 1
+        suffix = "grayscaled_";
+    else 
+        suffix = ""; 
+    end
+    img_out_name = strcat("image_brightening_", suffix, img_name);
+    write_image(combined_image, img_out_name);
 end
-img_out_name = strcat("image_brightening_", suffix, img_name);
-write_image(combined_image, img_out_name);
