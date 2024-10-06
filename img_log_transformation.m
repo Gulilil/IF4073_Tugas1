@@ -63,4 +63,4 @@ else
     suffix = ""; 
 end
 img_out_name = strcat("image_log_transformation_", suffix, img_name);
-write_image(result_img, img_out_name)
+write_image(combined_image, img_out_name);

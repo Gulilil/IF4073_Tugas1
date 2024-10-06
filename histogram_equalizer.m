@@ -28,9 +28,6 @@ if (num_channels ~= 1)
     end
 end
 
-% Display Image
-imshow(img);
-
 % Display initial histogram
 [hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram(img);
 histogram_show(hist_data, hist_data_r, hist_data_b, hist_data_g, is_gray, "of Initial Image");
@@ -50,22 +47,27 @@ if size(img, 3) == 3  % Jika gambar RGB, proses setiap channel (R, G, B) secara 
     imgEqualized = cat(3, imgEqualizedR, imgEqualizedG, imgEqualizedB);
 else
     % Jika gambar adalah grayscale
-    imgEqualized = equalizeChannel(img);
+    imgEqualized = equalizer_operation(img);
 end
-        
-% Simpan gambar yang sudah di-equalize
-new_file_directory = './img_in/new_image.png';
-new_file = 'new_image.png';
-imwrite(imgEqualized, new_file_directory);
-
-% Read new Image
-new_img = read_image(new_file);
-
-% Display Image in new figure
-figure;
-imshow(new_img);
 
 % Menampilkan histogram dari gambar yang telah di-equalize
 disp('Menampilkan histogram dari gambar yang telah di-equalize...');
-[hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram(new_img);
+[hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram(imgEqualized);
 histogram_show(hist_data, hist_data_r, hist_data_b, hist_data_g, is_gray, "of Equalized Image");
+
+
+% Show result image
+disp("[DISPLAYING] Here is displayed the initial and the result image");
+combined_image = cat(2, img, imgEqualized); 
+figure;
+imshow(combined_image);
+title('(Initial) | Images Side by Side Comparison | (Result)');
+
+% Write image
+if is_grayscaled == 1
+    suffix = "grayscaled_";
+else 
+    suffix = ""; 
+end
+img_out_name = strcat("histogram_equalizer_", suffix, img_name);
+write_image(combined_image, img_out_name);

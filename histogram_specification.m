@@ -124,5 +124,5 @@ else
         suffix = ""; 
     end
     img_out_name = strcat("histogram_specification_", suffix, img_name_source, img_name_reference);
-    write_image(combined_image, img_out_name)
+    write_image(combined_image, img_out_name);
 end
