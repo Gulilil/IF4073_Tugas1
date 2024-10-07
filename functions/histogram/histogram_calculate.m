@@ -1,4 +1,4 @@
-function [histogram_data, histogram_data_r, histogram_data_g, histogram_data_b] = histogram(img)
+function [histogram_data, histogram_data_r, histogram_data_g, histogram_data_b] = histogram_calculate(img)
     % Fungsi manual untuk menghitung histogram tanpa fungsi terpisah
     % Menghitung histogram secara manual untuk gambar grayscale atau channel RGB
     [rows, cols, numChannels] = size(img);  % Dapatkan ukuran gambar

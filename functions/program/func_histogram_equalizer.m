@@ -45,7 +45,7 @@ function [imgEqualized, hist_data, hist_data_r, hist_data_b, hist_data_g, log] =
     log = log + sprintf("[DISPLAYING] Here is displayed the initial and the result image\n");
     
     % Menampilkan histogram dari gambar yang telah di-equalize
-    [hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram(imgEqualized);
+    [hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram_calculate(imgEqualized);
 
     if is_saved 
         % Write image

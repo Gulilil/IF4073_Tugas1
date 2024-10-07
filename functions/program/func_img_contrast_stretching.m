@@ -68,7 +68,7 @@ function [result_img, hist_data, hist_data_r, hist_data_b, hist_data_g, log] = f
     log = log + sprintf("[DISPLAYING] Here is displayed the initial and the result image\n");
     
     % Make histogram
-    [hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram(result_img);
+    [hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram_calculate(result_img);
     
     if is_saved
         % Write image

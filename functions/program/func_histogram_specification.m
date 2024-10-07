@@ -63,8 +63,8 @@ function [result_img, result_histogram, result_histogram_r, result_histogram_b, 
         end
     
         % Process Image
-        [hist_data_source, hist_data_r_source, hist_data_b_source, hist_data_g_source] = histogram(img_source);
-        [hist_data_ref, hist_data_r_ref, hist_data_b_ref, hist_data_g_ref] = histogram(img_reference);
+        [hist_data_source, hist_data_r_source, hist_data_b_source, hist_data_g_source] = histogram_calculate(img_source);
+        [hist_data_ref, hist_data_r_ref, hist_data_b_ref, hist_data_g_ref] = histogram_calculate(img_reference);
         img_size = rows_s * cols_s;
     
         [result_histogram, mapped_hist] = match_histogram(hist_data_source, hist_data_ref, img_size, MAX_PIXEL_VAL);
