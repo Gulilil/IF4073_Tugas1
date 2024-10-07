@@ -42,7 +42,7 @@ function [result_img, hist_data, hist_data_r, hist_data_b, hist_data_g, log] = f
     end
     
     % Show result image
-    log = log + sprintf("[DISPLAYING] Here is displayed the initial and the result image\n");
+    log = log + sprintf("[DISPLAYING] Here is displayed the initial and the result image!\n");
     
     % Make histogram
     [hist_data, hist_data_r, hist_data_b, hist_data_g] = histogram_calculate(result_img);
@@ -56,6 +56,6 @@ function [result_img, hist_data, hist_data_r, hist_data_b, hist_data_g, log] = f
         end
         img_out_name = strcat("image_log_transformation_", suffix, img_name);
         write_image(result_img, img_out_name);
-        log = log + sprintf("[SAVED] The image is saved in %s\n", img_out_name);
+        log = log + sprintf("[SAVED] The image is saved in %s!\n", img_out_name);
     end
 end

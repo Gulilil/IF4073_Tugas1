@@ -101,7 +101,7 @@ function [result_img, result_histogram, result_histogram_r, result_histogram_b, 
         end
     
         % Show result image
-        log = log + sprintf("[DISPLAYING] Here is displayed the source, reference, and result image");
+        log = log + sprintf("[DISPLAYING] Here is displayed the source, reference, and result image!\n");
    
         
         if is_saved
@@ -113,7 +113,7 @@ function [result_img, result_histogram, result_histogram_r, result_histogram_b, 
             end
             img_out_name = strcat("histogram_specification_", suffix, img_name_source, img_name_reference);
             write_image(result_img, img_out_name);
-            log = log + sprintf("[SAVED] The image is saved in %s\n", img_out_name);
+            log = log + sprintf("[SAVED] The image is saved in %s!\n", img_out_name);
         end
     end
 end
