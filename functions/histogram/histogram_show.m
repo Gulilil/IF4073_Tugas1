@@ -32,4 +32,3 @@ function histogram_show(histogram_data, histogram_data_r, histogram_data_g, hist
         end
     end
 end
-

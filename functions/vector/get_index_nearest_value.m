@@ -5,4 +5,3 @@ function idx = get_index_nearest_value(vector, val)
         idx = idx + 1;
     end
 end
-

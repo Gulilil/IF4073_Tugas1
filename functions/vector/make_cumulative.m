@@ -9,4 +9,3 @@ function result_vector = make_cumulative(vector)
         end
     end
 end
-
