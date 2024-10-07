@@ -4,4 +4,3 @@ function sum = sum_value(vector)
         sum= sum + vector(i);
     end
 end
-

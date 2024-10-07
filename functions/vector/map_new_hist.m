@@ -7,4 +7,3 @@ function new_hist_data = map_new_hist(rounded_equalized_hist, initial_hist)
         new_hist_data(equalized_idx+1) = new_hist_data(equalized_idx+1) + n;
     end
 end
-

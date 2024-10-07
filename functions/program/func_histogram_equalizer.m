@@ -1,4 +1,3 @@
-
 function [imgEqualized, hist_data, hist_data_r, hist_data_b, hist_data_g, log] = func_histogram_equalizer(img, img_name, is_grayscaled, is_saved)
     % Initialization 
     addpath('./functions/image');
