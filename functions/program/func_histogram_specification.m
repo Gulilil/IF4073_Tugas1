@@ -40,8 +40,12 @@ function [result_img, result_histogram, result_histogram_r, result_histogram_b, 
     
     if (not (rows_s == rows_r) | not (cols_s == cols_r))
         log = log + sprintf('[FAILED] The two inputted images do not have the same size!\n');
+        [result_img, result_histogram, result_histogram_r, result_histogram_b, result_histogram_g] = deal([]);
+        return;
     elseif (not (num_channels_s == num_channels_r))
         log = log + sprintf('[FAILED] The two inputted images do not share the same color type!\n');
+        [result_img, result_histogram, result_histogram_r, result_histogram_b, result_histogram_g] = deal([]);
+        return;
     else
         % Both image rows and cols should be the same
         log = log + sprintf("[INFO] An image size [%d, %d] is inputted!\n", rows_s, cols_s);
