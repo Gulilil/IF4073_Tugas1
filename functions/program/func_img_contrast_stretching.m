@@ -32,7 +32,10 @@ function [result_img, hist_data, hist_data_r, hist_data_b, hist_data_g, log] = f
         for r = 1:rows
             for c = 1: cols
                 curr_pixel = img(r,c);
-                result_img(r, c) = normalize_pixel(curr_pixel, max_val, min_val);
+                result_img(r, c) = validate_pixel(normalize_pixel(curr_pixel, max_val, min_val));
+                if (r < 10 && c < 10)
+                    fprintf("%d %d\n", curr_pixel, result_img(r,c));
+                end
             end
         end
     else
@@ -57,9 +60,9 @@ function [result_img, hist_data, hist_data_r, hist_data_b, hist_data_g, log] = f
                 curr_pixel_g = double(img(r, c, 2));
                 curr_pixel_b = double(img(r, c, 3));
     
-                result_img(r, c, 1) = normalize_pixel(curr_pixel_r, max_val_r, min_val_r);
-                result_img(r, c, 2) = normalize_pixel(curr_pixel_g, max_val_g, min_val_g);
-                result_img(r, c, 3) = normalize_pixel(curr_pixel_b, max_val_b, min_val_b);
+                result_img(r, c, 1) = validate_pixel(normalize_pixel(curr_pixel_r, max_val_r, min_val_r));
+                result_img(r, c, 2) = validate_pixel(normalize_pixel(curr_pixel_g, max_val_g, min_val_g));
+                result_img(r, c, 3) = validate_pixel(normalize_pixel(curr_pixel_b, max_val_b, min_val_b));
             end
         end
     end
