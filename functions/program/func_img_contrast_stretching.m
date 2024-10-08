@@ -33,9 +33,6 @@ function [result_img, hist_data, hist_data_r, hist_data_b, hist_data_g, log] = f
             for c = 1: cols
                 curr_pixel = img(r,c);
                 result_img(r, c) = validate_pixel(normalize_pixel(curr_pixel, max_val, min_val));
-                if (r < 10 && c < 10)
-                    fprintf("%d %d\n", curr_pixel, result_img(r,c));
-                end
             end
         end
     else
